@@ -14,7 +14,17 @@ const textInput = document.getElementById('textInput')
 const tableSection = document.getElementById('tableSection')
 const selectSearch = document.getElementById('selectSearch')
 
+
+// 2. Prendo l'url base
+
 const baseUrl = 'https://jsonplaceholder.typicode.com/users'
 
 
+// 3. Faccio la fetch
 
+async function getInput(baseUrl) {
+    const res = await fetch(baseUrl)
+    const json = await res.json()
+    console.log(json)
+    renderTable(json)
+}
