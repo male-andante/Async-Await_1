@@ -67,10 +67,10 @@ textInput.addEventListener('keyup', filterBy)
 
 function filterBy(){
     const searchValue = textInput.value.trim().toLowerCase()
-    if (searchValue.length >= 2) {
+    if (searchValue.length > 2) {
         const filteredUsers = allUsers.filter(
-            (user) => {
-                if (user.name.toLowerCase().includes(searchValue) || user.username.toLowerCase().includes(searchValue)|| user.email.toLowerCase().includes(searchValue)) {
+            ({ name, username, email }) => {
+                if (name.toLowerCase().includes(searchValue) || username.toLowerCase().includes(searchValue)|| email.toLowerCase().includes(searchValue)) {
                     return true
                 }
                 return false
@@ -83,7 +83,19 @@ function filterBy(){
 
 }
 
+
 // 7. Faccio la localStorage per salvarmi il value della select
+
+selectSearch.addEventListener('click', localStorageFunction)
+
+function localStorageFunction(){
+    const selectValue = selectSearch.value
+
+    localStorage.setItem('selectSearch', selectValue)
+    const userProperty = localStorage.getItem('selectSearch')
+    console.log(userProperty)
+}
+
 
 
 
