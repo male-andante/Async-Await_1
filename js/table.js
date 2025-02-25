@@ -18,6 +18,7 @@ const selectSearch = document.getElementById('selectSearch')
 const tbody = document.getElementById('tbody')
 
 let allUsers = []
+let selectValue = ''
 
 
 //! 2. Prendo l'url base
@@ -67,9 +68,12 @@ textInput.addEventListener('keyup', filterBy)
 
 function filterBy(){
     const searchValue = textInput.value.trim().toLowerCase()
-    if (searchValue.length > 2) {
+    if (searchValue.length > 2)
         const filteredUsers = allUsers.filter(
             ({ name, username, email }) => {
+                if{
+                    seachValue
+                }
                 if (name.toLowerCase().includes(searchValue) || username.toLowerCase().includes(searchValue)|| email.toLowerCase().includes(searchValue)) {
                     return true
                 }
@@ -86,17 +90,23 @@ function filterBy(){
 
 // 7. Faccio la localStorage per salvarmi il value della select
 
-selectSearch.addEventListener('click', localStorageFunction)
+selectSearch.addEventListener('change', localStorageFunction)
 
 function localStorageFunction(){
-    const selectValue = selectSearch.value
+    selectValue = selectSearch.value
 
     localStorage.setItem('selectSearch', selectValue)
     const userProperty = localStorage.getItem('selectSearch')
     console.log(userProperty)
 }
 
+// 8. Modifico la filter inserendo la localStorage.
 
+if (localStorage.getItem('lastSearch')) {
+    // Impostare il precedente valore di ricerca all'interno dell'input
+    searchInput.value = localStorage.getItem('lastSearch');
+    getResults();
+}
 
 
 //! 9. Chiamo la fetch
